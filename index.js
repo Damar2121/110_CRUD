@@ -58,5 +58,4 @@ app.post('/api/mahasiswa', (req, res) => {
         res.status(201).json({ message: "User created successfully" });
     }
   );
-}
-  );
+});
