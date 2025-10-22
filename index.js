@@ -70,3 +70,19 @@ app.delete('/api/mahasiswa/:id', (req, res) => {
     res.json({ message: 'User deleted successfully' });
     });
 });
+
+app.put('/api/mahasiswa/:id', (req, res) => {
+  const userId = req.params.id;
+  const { nama, alamat, agama } = req.body;
+  db.query(
+    'UPDATE biodata SET nama = ?, alamat = ?, agama = ? WHERE id = ?',
+    [nama, alamat, agama, userId],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Database Error' });
+      }
+        res.json({ message: 'User updated successfully' });
+    }
+  );
+});
