@@ -40,3 +40,23 @@ app.get('/api/mahasiswa', (req, res) => {
     });
 });
 
+app.post('/api/mahasiswa', (req, res) => {
+  const { nama, alamat, agama  } = req.body;
+
+  if(!nama || !alamat || !agama){
+    return res.status(400).json({messeage: "Nama, Alamat, Agama wajib diisi"});
+  }
+
+  db.query(
+    "INSERT INTO biodata (nama, alamat, agama) VALUES (?, ?, ?)",
+    [nama, alamat, agama],
+    (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: "Database" });
+        }
+        res.status(201).json({ message: "User created successfully" });
+    }
+  );
+}
+  );
